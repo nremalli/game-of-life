@@ -1,0 +1,14 @@
+node{
+    stage('Version Control '){
+        git 'https://github.com/nremalli/game-of-life.git'
+    }
+    stage('Building the package '){
+        sh 'mvn package'
+    }
+    stage('Archiving the Artifact'){
+        archiveArtifacts 'gameoflife-web/target/gameoflife.war'
+    }
+    stage('Test Reports must be reported '){
+        junit 'gameoflife-web/target/surefire-reports/*.xml'
+    }
+}
